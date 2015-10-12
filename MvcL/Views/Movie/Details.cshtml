@@ -1,0 +1,52 @@
+﻿@model MvcL.Models.MovieViewModel
+
+@{
+    ViewBag.Title = Model.Title;
+}
+
+
+@using (Html.BeginForm("Details", "Movie"))
+{
+    <div class="display-movie-title-details"> @Model.Title </div>
+
+    <div>
+        <img class="display-picture-details" src=@Model.PistureString />
+    </div>
+
+    <div class="display-movie-details">
+        <div class="display-movie-information-details">
+            @Html.DisplayNameFor(model => model.Year) : @Html.DisplayFor(model => model.Year)
+            <br>
+            @Html.DisplayNameFor(model => model.Length) : @Html.DisplayTextFor(model => model.Length)
+            <br>
+            @Html.DisplayNameFor(model => model.Producer) : @Html.DisplayTextFor(model => model.Producer)
+            <br>
+            @Html.DisplayNameFor(model => model.Budget) : @Html.DisplayTextFor(model => model.Budget)
+            <br>
+            @Html.DisplayNameFor(model => model.Mark) : @Html.DisplayTextFor(model => model.Mark)
+            <br>
+        </div>
+        <div class="display-movie-description-details">
+            @Html.DisplayNameFor(model => model.Description)
+            <br>
+            @Html.DisplayFor(model => model.Description)
+        </div>
+
+        <div>
+            @Html.DropDownList("marks", ViewBag.MarkScale as SelectList, ViewBag.DefaultMark as string)
+            <input type="submit" value="Голосовать" />
+        </div>
+    </div>
+    <!--<div>
+        <video type='video/mp4' src=@Model.Data/>
+    </div>
+    -->
+
+    <p>
+        @if (User.IsInRole("Admin") || User.IsInRole("Moderator"))
+        {
+            @Html.ActionLink("Редактировать", "Edit", new { id = Model.Id })
+        }
+        @Html.ActionLink("Назад к списку фильмов", "Index")
+    </p>
+}

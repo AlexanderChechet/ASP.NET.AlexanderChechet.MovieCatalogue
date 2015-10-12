@@ -1,0 +1,47 @@
+﻿@model MvcL.Models.UserViewModel
+
+@{
+    ViewBag.Title = "Подтверждение удаления";
+}
+
+<h2>Удаление пользователя</h2>
+
+<h3>Вы действительно хотите удалить пользователя и все его данные?</h3>
+<fieldset>
+    <legend>UserViewModel</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Name)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Name)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Login)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Login)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Password)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Password)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.RoleId)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.RoleId)
+    </div>
+</fieldset>
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    <p>
+        <input type="submit" value="Удалить" /> |
+        @Html.ActionLink("Назад к списку пользователей", "Index")
+    </p>
+}

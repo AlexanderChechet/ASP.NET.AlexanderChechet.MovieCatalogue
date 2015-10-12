@@ -1,0 +1,61 @@
+﻿@model MvcL.Models.MovieViewModel
+
+@{
+    ViewBag.Title = "Удаление фильма";
+}
+
+<h2>Удаление фильма</h2>
+
+<h3>Вы действительно хотите удалить фильм?</h3>
+<fieldset>
+    <legend>Информация о фильме</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Title)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Title)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Description)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Description)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Year)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Year)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Length)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Length)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Producer)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Producer)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Budget)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Budget)
+    </div>
+</fieldset>
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    <p>
+        <input type="submit" value="Delete" /> |
+        @Html.ActionLink("Назад к списку фильмов", "Index")
+    </p>
+}

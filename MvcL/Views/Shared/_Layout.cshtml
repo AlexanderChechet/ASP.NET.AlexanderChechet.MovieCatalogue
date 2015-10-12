@@ -1,0 +1,76 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+     
+</head>
+<body>
+    @if (User.IsInRole("Admin"))
+    {
+        <h2>Меню администратора</h2>
+            <div class="menu">
+                <ul>
+                    <li><a class="hide">Фильмы</a>
+                        <ul class="submenu">
+                            <li>@Html.ActionLink("Добавление", "Create", "Movie")</li>
+                            <li>@Html.ActionLink("Просмотр", "Index", "Movie")</li>
+                            <li>@Html.ActionLink("Избранные", "Index", "Favorite")</li>
+                        </ul>
+                    </li>
+                    <li>@Html.ActionLink("Поиск", "Index", "Search")</li>
+                    <li><a class="hide">Пользователи</a>
+                        <ul class="submenu">
+                            <li>@Html.ActionLink("Добавление", "Create", "User")</li>
+                            <li>@Html.ActionLink("Просмотр", "Index", "User")</li>
+                        </ul>
+                    </li>
+                    <li>@Html.ActionLink("Выйти", "LogOff", "Account")</li>
+                </ul>
+            </div> 
+    }
+    else if (User.IsInRole("Moderator"))
+    {
+        <h2>Меню модератора</h2>
+            <div class="menu">
+                <ul>
+                    <li><a class="hide">Фильмы</a>
+                        <ul class="submenu">
+                            <li>@Html.ActionLink("Добавление", "Create", "Movie")</li>
+                            <li>@Html.ActionLink("Просмотр", "Index", "Movie")</li>
+                            <li>@Html.ActionLink("Избранные", "Index", "Favorite")</li>
+                        </ul>
+                    </li>
+                    <li>@Html.ActionLink("Поиск", "Index", "Search")</li>
+                    <li>@Html.ActionLink("Пользователи", "Index", "User")</li>
+                    <li>@Html.ActionLink("Выйти", "LogOff", "Account")</li>
+                </ul>
+            </div> 
+    }
+    else if (User.IsInRole("User"))
+    {
+        <h2>Приветствую, @User.Identity.Name</h2>
+            <div class="menu">
+                <ul>
+                    <li><a class="hide">Фильмы</a>
+                        <ul class="submenu">
+                            <li>@Html.ActionLink("Просмотр", "Index", "Movie")</li>
+                            <li>@Html.ActionLink("Избранные", "Index", "Favorite")</li>
+                        </ul>
+                    </li>                    
+                    <li>@Html.ActionLink("Пользователи", "Index", "User")</li>
+                    <li>@Html.ActionLink("Поиск", "Index", "Search")</li>
+                    <li>@Html.ActionLink("Выйти", "LogOff", "Account")</li>
+                </ul>
+         </div>
+    }
+ 
+    @RenderBody()
+ 
+    @Scripts.Render("~/bundles/jquery")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

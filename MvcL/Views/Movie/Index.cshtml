@@ -1,0 +1,38 @@
+﻿@model IEnumerable<MvcL.Models.MovieViewModel>
+
+@{
+    ViewBag.Title = "Фильмы";
+}
+
+<center><h2>Фильмы</h2></center>
+
+<table class="movie-table">
+
+@foreach (var item in Model) 
+{
+    <tr>
+        <td>
+            <img class ="display-picture-index" src=@item.PistureString />
+        </td>
+        <td >
+            <div class ="movie-title">
+                @Html.ActionLink(item.Title, "Details", new { id=item.Id })
+            </div>
+            <div class ="movie-description">
+                @Html.DisplayFor(modelItem => item.Description)
+            </div>
+        </td>
+            
+        
+        <td>
+        @Html.ActionLink("Add to favorite", "AddFavorite", new { id=item.Id })
+        @if (User.IsInRole("Admin") || User.IsInRole("Moderator"))
+        {
+            @Html.ActionLink("Edit", "Edit", new { id=item.Id })
+            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+        }
+        </td>
+    </tr>
+}
+
+</table>

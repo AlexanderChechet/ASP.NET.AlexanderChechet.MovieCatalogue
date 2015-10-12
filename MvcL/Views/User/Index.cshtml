@@ -1,0 +1,56 @@
+﻿@model IEnumerable<MvcL.Models.UserViewModel>
+ 
+@{
+    ViewBag.Title = "Список пользователей";
+}
+ 
+<h2>Список пользователей</h2>
+
+<table>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.First().Name)
+        </th>
+         @if (HttpContext.Current.User.IsInRole("admin"))
+        {
+        <th>
+            @Html.DisplayNameFor(model => model.First().Login)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().Password)
+        </th>
+        }
+        <th>
+            @Html.DisplayNameFor(model => model.First().RoleId)
+        </th>
+        <th></th>
+    </tr>
+ 
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        @if (HttpContext.Current.User.IsInRole("Admin"))
+        {
+        <td>
+            @Html.DisplayFor(modelItem => item.Login)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Password)
+        </td>
+        }
+        <td>
+            @Html.Display(ViewBag.RolesArray[item.RoleId] as string)
+        </td>
+        @if (HttpContext.Current.User.IsInRole("Admin"))
+        {
+        <td>
+            @Html.ActionLink("Редактировать", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("Удалить", "Delete", new { id=item.Id })
+        </td>
+        }
+    </tr>
+    
+}
+</table>
